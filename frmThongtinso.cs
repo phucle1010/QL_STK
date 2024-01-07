@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Thong_Tin_Khach_hang;
 using System.Drawing.Printing;
 using System.Globalization;
+using System.Xml.Serialization;
 
 namespace WindowsFormsApp1
 {
@@ -356,6 +357,7 @@ namespace WindowsFormsApp1
       
         void TinhLai(int i)
         {
+            TinhLaiContext ctx = new TinhLaiContext(new LaiTatToan());
             if (txtHinhThucTL.Text == "Tất toán sổ")
             {
                 goc = (ulong)(float.Parse(txtSoDu.Text));
@@ -366,12 +368,13 @@ namespace WindowsFormsApp1
                 DateTime ngaydh = ngaygoi.AddDays(30 * thangTH);
                 txtngayDH.Text = ngaydh.ToString("dd/MM/yyyy");
                 lai =0;
-                lai1 = (ulong)(goc * laixuat/100);
+                lai1 = ctx.TinhLai(goc, laixuat,0);
             }
             else
             {
                 if (txtHinhThucTL.Text == "Lãi nhập gốc")
                 {
+                    ctx.ChonStrategy(new LaiNhapGoc());
                     goc = (ulong)(float.Parse(txtSoDu.Text));
                     float laixuat = float.Parse(txtLaiXuat.Text);
                     DateTime ngaygoi = DateTime.Parse(dataGridView1.Rows[i].Cells[5].Value.ToString());
@@ -382,13 +385,14 @@ namespace WindowsFormsApp1
                     soKH = (int)(thangGoi / thangKH);
                     DateTime ngayDHSaptToi = ngaygoi.AddDays(30 * thangKH * (soKH + 1));
                     txtngayDH.Text = ngayDHSaptToi.ToString("dd/MM/yyyy");
-                    goclai = (ulong)(goc * (Math.Pow((1 + laixuat / 100), soKH)));
-                    ulong goclai1 = (ulong)(goc * (Math.Pow((1 + laixuat / 100), (soKH + 1))));
-                    lai = goclai - goc;
-                    lai1 = goclai1 - goc;
+                    //goclai = (ulong)(goc * (Math.Pow((1 + laixuat / 100), soKH)));
+                    //ulong goclai1 = (ulong)(goc * (Math.Pow((1 + laixuat / 100), (soKH + 1))));
+                    lai = ctx.TinhLai(goc, laixuat, soKH); 
+                    lai1 = ctx.TinhLai(goc, laixuat, soKH+1);
                 }
                 else
                 {
+                    ctx.ChonStrategy(new LaiTraVeTaiKhoan());
                     goc = (ulong)(float.Parse(txtSoDu.Text));
                     float laixuat = float.Parse(txtLaiXuat.Text);
                     DateTime ngaygoi = DateTime.Parse(dataGridView1.Rows[i].Cells[5].Value.ToString()).Date;
@@ -399,8 +403,8 @@ namespace WindowsFormsApp1
                     soKH = (int)(thangGoi / thangKH);
                     DateTime ngayDHSaptToi = ngaygoi.AddDays(30 * thangKH * (soKH + 1));
                     txtngayDH.Text = ngayDHSaptToi.ToString("dd/MM/yyyy");                
-                    lai = 0;
-                    lai1 = (ulong)(goc*laixuat/100);
+                    lai = ctx.TinhLai(goc, laixuat, soKH);
+                    lai1 = ctx.TinhLai(goc, laixuat, soKH+1);
                 }
             }
         }
