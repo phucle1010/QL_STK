@@ -286,7 +286,7 @@
             this.label97.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label97.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label97.ForeColor = System.Drawing.Color.DimGray;
-            this.label97.Location = new System.Drawing.Point(903, 241);
+            this.label97.Location = new System.Drawing.Point(914, 241);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(45, 20);
             this.label97.TabIndex = 27;
@@ -314,7 +314,7 @@
             this.txttienlaimoi.Margin = new System.Windows.Forms.Padding(5);
             this.txttienlaimoi.Name = "txttienlaimoi";
             this.txttienlaimoi.ReadOnly = true;
-            this.txttienlaimoi.Size = new System.Drawing.Size(188, 34);
+            this.txttienlaimoi.Size = new System.Drawing.Size(197, 34);
             this.txttienlaimoi.TabIndex = 7;
             // 
             // label6
@@ -343,12 +343,12 @@
             // 
             this.label47.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(455, 235);
+            this.label47.Location = new System.Drawing.Point(412, 236);
             this.label47.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(290, 25);
+            this.label47.Size = new System.Drawing.Size(333, 25);
             this.label47.TabIndex = 6;
-            this.label47.Text = "Tiền lãi khi hoàn thành kì hạn tới";
+            this.label47.Text = "Tổng tiền lãi khi hoàn thành kì hạn tới";
             // 
             // txtMaKH
             // 
@@ -554,12 +554,12 @@
             // 
             this.label22.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(603, 306);
+            this.label22.Location = new System.Drawing.Point(560, 307);
             this.label22.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(142, 25);
+            this.label22.Size = new System.Drawing.Size(185, 25);
             this.label22.TabIndex = 1;
-            this.label22.Text = "Tiền lãi hiện tại";
+            this.label22.Text = "Tổng tiền lãi hiện tại";
             // 
             // label4
             // 
@@ -1034,7 +1034,7 @@
             this.label103.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label103.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label103.ForeColor = System.Drawing.Color.DimGray;
-            this.label103.Location = new System.Drawing.Point(1296, 512);
+            this.label103.Location = new System.Drawing.Point(1325, 509);
             this.label103.Name = "label103";
             this.label103.Size = new System.Drawing.Size(45, 20);
             this.label103.TabIndex = 28;
@@ -1048,7 +1048,7 @@
             this.label102.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label102.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label102.ForeColor = System.Drawing.Color.DimGray;
-            this.label102.Location = new System.Drawing.Point(1295, 452);
+            this.label102.Location = new System.Drawing.Point(1324, 449);
             this.label102.Name = "label102";
             this.label102.Size = new System.Drawing.Size(45, 20);
             this.label102.TabIndex = 28;
@@ -1062,7 +1062,7 @@
             this.label48.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label48.ForeColor = System.Drawing.Color.DimGray;
-            this.label48.Location = new System.Drawing.Point(1291, 372);
+            this.label48.Location = new System.Drawing.Point(1320, 369);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(45, 20);
             this.label48.TabIndex = 28;
@@ -1098,7 +1098,7 @@
             // 
             this.tblaimoi.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tblaimoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tblaimoi.Location = new System.Drawing.Point(1009, 444);
+            this.tblaimoi.Location = new System.Drawing.Point(1038, 441);
             this.tblaimoi.Margin = new System.Windows.Forms.Padding(5);
             this.tblaimoi.Name = "tblaimoi";
             this.tblaimoi.ReadOnly = true;
@@ -1109,12 +1109,12 @@
             // 
             this.label95.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label95.AutoSize = true;
-            this.label95.Location = new System.Drawing.Point(709, 448);
+            this.label95.Location = new System.Drawing.Point(695, 445);
             this.label95.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(290, 25);
+            this.label95.Size = new System.Drawing.Size(333, 25);
             this.label95.TabIndex = 21;
-            this.label95.Text = "Tiền lãi khi hoàn thành kì hạn tới";
+            this.label95.Text = "Tổng tiền lãi khi hoàn thành kì hạn tới";
             // 
             // lbGhiChu1
             // 
@@ -1153,7 +1153,7 @@
             // 
             this.tbHinhTTL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbHinhTTL.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbHinhTTL.Location = new System.Drawing.Point(1005, 141);
+            this.tbHinhTTL.Location = new System.Drawing.Point(1038, 144);
             this.tbHinhTTL.Margin = new System.Windows.Forms.Padding(4);
             this.tbHinhTTL.Name = "tbHinhTTL";
             this.tbHinhTTL.ReadOnly = true;
@@ -1201,14 +1201,14 @@
             this.tbLoaiTK1.Margin = new System.Windows.Forms.Padding(4);
             this.tbLoaiTK1.Name = "tbLoaiTK1";
             this.tbLoaiTK1.ReadOnly = true;
-            this.tbLoaiTK1.Size = new System.Drawing.Size(335, 34);
+            this.tbLoaiTK1.Size = new System.Drawing.Size(315, 34);
             this.tbLoaiTK1.TabIndex = 12;
             // 
             // tbNgayDH
             // 
             this.tbNgayDH.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbNgayDH.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNgayDH.Location = new System.Drawing.Point(1005, 283);
+            this.tbNgayDH.Location = new System.Drawing.Point(1034, 280);
             this.tbNgayDH.Margin = new System.Windows.Forms.Padding(4);
             this.tbNgayDH.Name = "tbNgayDH";
             this.tbNgayDH.ReadOnly = true;
@@ -1219,7 +1219,7 @@
             // 
             this.lbGH.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbGH.AutoSize = true;
-            this.lbGH.Location = new System.Drawing.Point(799, 286);
+            this.lbGH.Location = new System.Drawing.Point(814, 286);
             this.lbGH.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGH.Name = "lbGH";
             this.lbGH.Size = new System.Drawing.Size(134, 25);
@@ -1252,7 +1252,7 @@
             // 
             this.tbLai1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbLai1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbLai1.Location = new System.Drawing.Point(1005, 365);
+            this.tbLai1.Location = new System.Drawing.Point(1034, 362);
             this.tbLai1.Margin = new System.Windows.Forms.Padding(4);
             this.tbLai1.Name = "tbLai1";
             this.tbLai1.ReadOnly = true;
@@ -1275,7 +1275,7 @@
             this.rdbKhong.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rdbKhong.AutoCheck = false;
             this.rdbKhong.AutoSize = true;
-            this.rdbKhong.Location = new System.Drawing.Point(1088, 209);
+            this.rdbKhong.Location = new System.Drawing.Point(1119, 209);
             this.rdbKhong.Margin = new System.Windows.Forms.Padding(4);
             this.rdbKhong.Name = "rdbKhong";
             this.rdbKhong.Size = new System.Drawing.Size(91, 29);
@@ -1289,7 +1289,7 @@
             this.rdbCo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rdbCo.AutoCheck = false;
             this.rdbCo.AutoSize = true;
-            this.rdbCo.Location = new System.Drawing.Point(1009, 209);
+            this.rdbCo.Location = new System.Drawing.Point(1038, 209);
             this.rdbCo.Margin = new System.Windows.Forms.Padding(4);
             this.rdbCo.Name = "rdbCo";
             this.rdbCo.Size = new System.Drawing.Size(59, 29);
@@ -1302,7 +1302,7 @@
             // 
             this.label52.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(742, 510);
+            this.label52.Location = new System.Drawing.Point(762, 508);
             this.label52.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(236, 25);
@@ -1358,12 +1358,12 @@
             // 
             this.label46.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(802, 368);
+            this.label46.Location = new System.Drawing.Point(830, 368);
             this.label46.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(75, 25);
+            this.label46.Size = new System.Drawing.Size(118, 25);
             this.label46.TabIndex = 2;
-            this.label46.Text = "Tiền lãi";
+            this.label46.Text = "Tổng tiền lãi";
             // 
             // label41
             // 
@@ -1424,7 +1424,7 @@
             // 
             this.tbTongTien.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbTongTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbTongTien.Location = new System.Drawing.Point(1009, 505);
+            this.tbTongTien.Location = new System.Drawing.Point(1038, 502);
             this.tbTongTien.Margin = new System.Windows.Forms.Padding(4);
             this.tbTongTien.Name = "tbTongTien";
             this.tbTongTien.ReadOnly = true;
@@ -1672,9 +1672,6 @@
             this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
-            // 
-            // printDocument1
-            // 
             // 
             // frmThongtinso
             // 
