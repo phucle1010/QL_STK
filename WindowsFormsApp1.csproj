@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="DAO\dataProvider.cs" />
     <Compile Include="BUS\editPerson.cs" />
+    <Compile Include="DTO\GiaoDich.cs" />
     <Compile Include="frmAccount.cs">
       <SubType>Form</SubType>
     </Compile>
