@@ -15,18 +15,19 @@ namespace WindowsFormsApp1
 {
     public interface IAuthenticationService
     {
-        bool Authenticate( string username, string password );
-        bool IsValidatedData( string username, string password );
+        bool Authenticate(string username, string password);
+        bool IsValidatedData(string username, string password);
     }
 
     public class RealAuthenticationService : IAuthenticationService
     {
-        public bool Authenticate( string username, string password ) {
+        public bool Authenticate(string username, string password)
+        {
             string query = "select MatKhau,SDT from NHANVIEN where SDT='" + username + "' and MatKhau='" + password + "'";
             return dataProvider.Instance.ExecuteReader(query);
         }
 
-        public bool IsValidatedData( string username, string password )
+        public bool IsValidatedData(string username, string password)
         {
             return false;
         }
@@ -42,7 +43,7 @@ namespace WindowsFormsApp1
             this.realAuthenticationService = new RealAuthenticationService();
         }
 
-        public bool Authenticate( string username, string password )
+        public bool Authenticate(string username, string password)
         {
             // Kiểm tra điều kiện trước khi thực hiện login
             if (realAuthenticationService.IsValidatedData(username, password))
@@ -53,10 +54,10 @@ namespace WindowsFormsApp1
             return false;
         }
 
-        public bool IsValidatedData( string username, string password )
+        public bool IsValidatedData(string username, string password)
         {
             if (
-                username == "Phone Number" || 
+                username == "Phone Number" ||
                 username.Length < 10 && username.Length > 11 ||
                 !username.StartsWith("0") ||
                 (password == "Password")
@@ -71,7 +72,6 @@ namespace WindowsFormsApp1
 
     public partial class Login : Form
     {
-
         public static string sdt = "";
         private bool check = false;
         IAuthenticationService authenticationService = new AuthenticationProxy();
@@ -79,12 +79,13 @@ namespace WindowsFormsApp1
         public Login()
         {
             InitializeComponent();
-            
+
         }
 
 
         private void rjTextBox1_Enter(object sender, EventArgs e)
         {
+            this.isValidAccount();
             if (txtSDT.Text == "Phone Number")
             {
                 txtSDT.Text = "";
@@ -95,6 +96,7 @@ namespace WindowsFormsApp1
 
         private void txtGmail_Leave(object sender, EventArgs e)
         {
+            this.isValidAccount();
             if (txtSDT.Text == "")
             {
                 txtSDT.Text = "Phone Number";
@@ -105,9 +107,10 @@ namespace WindowsFormsApp1
 
         private void txtMatKhau_Leave(object sender, EventArgs e)
         {
+            this.isValidAccount();
             if (txtMatKhau.Text == "")
             {
-                
+
                 txtMatKhau.Text = "Password";
                 txtMatKhau.ForeColor = Color.FromArgb(64, 64, 64);
                 txtMatKhau.PasswordChar = '\0';
@@ -117,6 +120,7 @@ namespace WindowsFormsApp1
 
         private void txtMatKhau_Enter(object sender, EventArgs e)
         {
+            this.isValidAccount();
             if (txtMatKhau.Text == "Password")
             {
                 txtMatKhau.Text = "";
@@ -128,13 +132,13 @@ namespace WindowsFormsApp1
 
         private void txtMatKhau_TextChanged(object sender, EventArgs e)
         {
-            if(txtMatKhau.Text==""||txtMatKhau.Text== "Password")
+            if (txtMatKhau.Text == "" || txtMatKhau.Text == "Password")
             {
                 ptbeye.Hide();
                 ptbeyeslash.Hide();
                 txtMatKhau.PasswordChar = '\0';
                 if (txtMatKhau.Text == "")
-                check=false;
+                    check = false;
             }
             else
             {
@@ -148,7 +152,7 @@ namespace WindowsFormsApp1
                     ptbeyeslash.Show();
                     txtMatKhau.PasswordChar = '*';
                 }
-            }  
+            }
         }
 
         private void rjButton1_Click(object sender, EventArgs e)
@@ -191,7 +195,7 @@ namespace WindowsFormsApp1
             txtMatKhau.Text = "";
             lblerror.Show();
         }
-        
+
         private void OpenAdminForm()
         {
             Application.Run(new MainFormManager());
