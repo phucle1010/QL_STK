@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\DAO",
+    "\\DTO"
   ],
-  "SelectedNode": "\\MainFormManager.resx",
+  "SelectedNode": "\\DAO\\dataProvider.cs",
   "PreviewInSolutionExplorer": false
 }
