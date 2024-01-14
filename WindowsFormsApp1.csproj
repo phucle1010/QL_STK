@@ -146,6 +146,7 @@
     <Compile Include="RJControls\RjTextBox.Designer.cs">
       <DependentUpon>RjTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Strategy.cs" />
     <Compile Include="ThongTinChinhSach.cs">
       <SubType>Form</SubType>
     </Compile>
