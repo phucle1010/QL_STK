@@ -1311,6 +1311,70 @@ namespace Thong_Tin_Khach_hang
             ShowData();
         }
 
+
+        // chain of responsibility
+        public interface ITransactionHandler
+        {
+            bool HandleTransaction(phieuRutTien phieu, string query);
+        }
+
+        public class DatabaseTransactionHandler : ITransactionHandler
+        {
+            private ITransactionHandler nextHandler;
+            private frmthongTinKhachHang formInstance;
+
+            public DatabaseTransactionHandler(frmthongTinKhachHang instance)
+            {
+                formInstance = instance;
+            }
+            public void SetNextHandler(ITransactionHandler handler)
+            {
+                nextHandler = handler;
+            }
+
+            public bool HandleTransaction(phieuRutTien phieu, string query)
+            {
+                // Perform database transaction here
+                decimal sodu = decimal.Parse(formInstance.txtSoDu.Text) - decimal.Parse(formInstance.txtNapTien.Text);
+                string databaseQuery = "update KHACHHANG set SoDu='" + sodu + "'where MaKH='" + formInstance.txtmaKH.Text + "'";
+
+                if (dataProvider.Instance.ExecuteNonQuery(databaseQuery) != 0)
+                {
+                    if (nextHandler != null)
+                    {
+                        return nextHandler.HandleTransaction(phieu, query);
+                    }
+
+                    return true;
+                }
+
+                return false;
+            }
+        }
+        public class PrintTransactionHandler : ITransactionHandler
+        {
+            private ITransactionHandler nextHandler;
+            private frmthongTinKhachHang formInstance;
+            public void SetNextHandler(ITransactionHandler handler)
+            {
+                nextHandler = handler;
+            }
+            public PrintTransactionHandler(frmthongTinKhachHang instance)
+            {
+                formInstance = instance;
+            }
+            public bool HandleTransaction(phieuRutTien phieu, string query)
+            {
+                // Perform printing here
+                formInstance.Print(formInstance.panel7);
+                if (nextHandler != null)
+                {
+                    return nextHandler.HandleTransaction(phieu, query);
+                }
+                return true;
+            }
+        }
+
         private void iconButton11_Click_1(object sender, EventArgs e)
         {
             if (!b)
@@ -1345,7 +1409,6 @@ namespace Thong_Tin_Khach_hang
             {
                 Print(panel7);
             }
-
         }
 
         private void txtTienMoSo_TextChanged(object sender, EventArgs e)
