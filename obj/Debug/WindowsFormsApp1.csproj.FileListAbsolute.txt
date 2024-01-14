@@ -238,53 +238,28 @@ E:\C#\QL_SoTietKiem\Giaodienchinh\bin\Debug\WindowsFormsApp1.pdb
 E:\C#\QL_SoTietKiem\Giaodienchinh\bin\Debug\FontAwesome.Sharp.dll
 E:\C#\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
 E:\C#\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.csproj.SuggestedBindingRedirects.cache
-D:\QLSTK_MTK\QL_STK\obj\Debug\Lần_1.ChinhSuaLoaiTK.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.frmAccount.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.frmDoanhSoNgay.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.frmForgotPassWord.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\Lần_1.FrmNhanVien.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.frmThongtinso.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.frmTopKhachHang.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\Thong_Tin_Khach_hang.frmthongTinKhachHang.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.MainFormManager.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.ForgotPass.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.Login.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.RJControls.RjTextBox.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\Lần_1.ThongTinChinhSach.resources
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.exe
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.pdb
-D:\QLSTK_MTK\QL_STK\bin\Debug\WindowsFormsApp1.exe.config
-D:\QLSTK_MTK\QL_STK\bin\Debug\WindowsFormsApp1.exe
-D:\QLSTK_MTK\QL_STK\bin\Debug\WindowsFormsApp1.pdb
-D:\QLSTK_MTK\QL_STK\bin\Debug\FontAwesome.Sharp.dll
-D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\bin\Debug\WindowsFormsApp1.exe.config
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\bin\Debug\WindowsFormsApp1.exe
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\bin\Debug\WindowsFormsApp1.pdb
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\bin\Debug\FontAwesome.Sharp.dll
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.csproj.SuggestedBindingRedirects.cache
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\Lần_1.ChinhSuaLoaiTK.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.frmAccount.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.frmDoanhSoNgay.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.frmForgotPassWord.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\Lần_1.FrmNhanVien.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.frmThongtinso.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.frmTopKhachHang.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\Thong_Tin_Khach_hang.frmthongTinKhachHang.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.MainFormManager.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.ForgotPass.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.Login.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.RJControls.RjTextBox.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\Lần_1.ThongTinChinhSach.resources
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.exe
-D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.pdb
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\bin\Debug\WindowsFormsApp1.exe.config
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\bin\Debug\WindowsFormsApp1.exe
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\bin\Debug\WindowsFormsApp1.pdb
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\bin\Debug\FontAwesome.Sharp.dll
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.csproj.SuggestedBindingRedirects.cache
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\Lần_1.ChinhSuaLoaiTK.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.frmAccount.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.frmDoanhSoNgay.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.frmForgotPassWord.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\Lần_1.FrmNhanVien.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.frmThongtinso.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.frmTopKhachHang.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\Thong_Tin_Khach_hang.frmthongTinKhachHang.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.MainFormManager.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.ForgotPass.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.RJControls.RjTextBox.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\Lần_1.ThongTinChinhSach.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.exe
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.pdb
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.RealAuthenticationService.resources

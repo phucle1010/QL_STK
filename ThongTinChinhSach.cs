@@ -26,13 +26,16 @@ namespace Lần_1
         {
             string st = "SELECT * FROM THAMSO";
             DataTable dt = dataProvider.Instance.ExecuteQuery(st);
-            DataRow dtr = dt.Rows[0];
-            tbTTBanDau.Text = dtr[0].ToString();
-            tbTTThem.Text = dtr[1].ToString();
-            tbSNTTSauGoi.Text = dtr[2].ToString();
-            tbTTBanDau.ReadOnly = true;
-            tbTTThem.ReadOnly = true;
-            tbSNTTSauGoi.ReadOnly = true;
+            if (dt.Rows.Count > 0)
+            {
+                DataRow dtr = dt.Rows[0];
+                tbTTBanDau.Text = dtr[0].ToString();
+                tbTTThem.Text = dtr[1].ToString();
+                tbSNTTSauGoi.Text = dtr[2].ToString();
+                tbTTBanDau.ReadOnly = true;
+                tbTTThem.ReadOnly = true;
+                tbSNTTSauGoi.ReadOnly = true;
+            }
         }
         private void button2_Click(object sender, EventArgs e)
         {
