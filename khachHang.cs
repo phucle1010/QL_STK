@@ -17,6 +17,7 @@ namespace Thong_Tin_Khach_hang
 {
     public partial class frmthongTinKhachHang : Form
     {
+        GiaoDich giaoDich;
         DataTable dt = new DataTable();
         editPerson edit = new editPerson();
         DateTime date = DateTime.Now;
@@ -583,7 +584,6 @@ namespace Thong_Tin_Khach_hang
             if (!b)
             {
                 decimal sodu = decimal.Parse(txtNapTien.Text) + decimal.Parse(txtSoDu.Text);
-                string query = "update KHACHHANG set SoDu=" + sodu + "where MaKH='" + txtmaKH.Text + "'";
                 phieuGuiTien pg = new phieuGuiTien();
                 pg.maPhieu = lblMaPhieuGui.Text;
                 pg.maKH = txtmaKH.Text;
@@ -592,7 +592,12 @@ namespace Thong_Tin_Khach_hang
                 pg.soTienGui = decimal.Parse(txtNapTien.Text);
                 pg.maNV = MainFormManager.Instance.maNV();
                 pg.noiDungGiaoDich = "Nộp tiền vào tài khoản";
-                if (edit.InsertphieuGuiTien(pg) && dataProvider.Instance.ExecuteNonQuery(query) != 0)
+                giaoDich = new GiaoDich();
+                giaoDich.makh = txtmaKH.Text;
+                giaoDich.sodu = sodu;
+                giaoDich.pg = pg;
+                bool success = giaoDich.GiaoDichGuiTien();
+                if (success)
                 {
                     Print(panel11);
                     MessageBox.Show("Giao dịch thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -601,6 +606,7 @@ namespace Thong_Tin_Khach_hang
                 else
                 {
                     MessageBox.Show("Giao dịch thất bại, vui lòng thử lại sau", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
             }
             else
@@ -1096,43 +1102,49 @@ namespace Thong_Tin_Khach_hang
             {
                 while (CheckMa(st))
                 {
-                   
-                        Passbook pb = new Passbook();
-                        pb.maSoTK = lblmaso2.Text;
-                        pb.maKH = txtmaKH1.Text;
-                        pb.maLoaiTK = dataProvider.Instance.ExecuteScalar(query).ToString();
-                        pb.maNV = MainFormManager.Instance.maNV();
-                        pb.maChiNhanh = MainFormManager.Instance.maCN();
-                        pb.ngayMoSo = dtmngayMoSo.Value;
-                        pb.soDuSo = decimal.Parse(txtTienMoSo.Text);
-                        pb.hinhThucTraLai = cboHinhThucTraLai.Text;
-                        pb.soLanGiaHan = 0;
-                        decimal sodu = decimal.Parse(txtSoDu1.Text) - decimal.Parse(txtTienMoSo.Text);
-                        string query2 = "update KHACHHANG set SoDu=" + sodu + "where MaKH='" + lblmakh2.Text + "'";
 
-                        phieuRutTien pr = new phieuRutTien();
-                        pr.maPhieu = Random().ToString();
-                        pr.maKH = txtmaKH.Text;
-                        pr.maCN = MainFormManager.Instance.maCN();
-                        pr.ngayRut = dtmngayMoSo.Value;
-                        pr.soTienRut = decimal.Parse(txtTienMoSo.Text);
-                        pr.maNV = MainFormManager.Instance.maNV();
-                        pr.noiDungGiaoDich = "Nộp tiền vào sổ tiết kiệm";
-                        if (edit.InsertPassBook(pb) && dataProvider.Instance.ExecuteNonQuery(query2) != 0 && edit.InsertphieuRutTien(pr))
-                        {
-                            b = true;
-                            Print(pnlPrint);
-                            TuDongGoiMail();
-                            MessageBox.Show("mở sổ thành công!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            reload();
-                            reload1();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Vui lòng kiểm tra lại thông tin!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                    Passbook pb = new Passbook();
+                    pb.maSoTK = lblmaso2.Text;
+                    pb.maKH = txtmaKH1.Text;
+                    pb.maLoaiTK = dataProvider.Instance.ExecuteScalar(query).ToString();
+                    pb.maNV = MainFormManager.Instance.maNV();
+                    pb.maChiNhanh = MainFormManager.Instance.maCN();
+                    pb.ngayMoSo = dtmngayMoSo.Value;
+                    pb.soDuSo = decimal.Parse(txtTienMoSo.Text);
+                    pb.hinhThucTraLai = cboHinhThucTraLai.Text;
+                    pb.soLanGiaHan = 0;
 
-                   
+                    decimal sodu = decimal.Parse(txtSoDu1.Text) - decimal.Parse(txtTienMoSo.Text);
+
+                    phieuRutTien pr = new phieuRutTien();
+                    pr.maPhieu = Random().ToString();
+                    pr.maKH = txtmaKH.Text;
+                    pr.maCN = MainFormManager.Instance.maCN();
+                    pr.ngayRut = dtmngayMoSo.Value;
+                    pr.soTienRut = decimal.Parse(txtTienMoSo.Text);
+                    pr.maNV = MainFormManager.Instance.maNV();
+                    pr.noiDungGiaoDich = "Nộp tiền vào sổ tiết kiệm";
+                    giaoDich = new GiaoDich();
+                    giaoDich.pb = pb;
+                    giaoDich.pr = pr;
+                    giaoDich.sodu = sodu;
+                    giaoDich.makh = lblmakh2.Text;
+                    bool success = giaoDich.GiaoDichMoSo();
+                    if (success)
+                    {
+                        b = true;
+                        Print(pnlPrint);
+                        TuDongGoiMail();
+                        MessageBox.Show("mở sổ thành công!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        reload();
+                        reload1();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng kiểm tra lại thông tin!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+
                 }
             }
             else
@@ -1247,7 +1259,6 @@ namespace Thong_Tin_Khach_hang
             if (!b)
             {
                 decimal sodu = decimal.Parse(txtSoDu.Text) - decimal.Parse(txtNapTien.Text);
-                string query = "update KHACHHANG set SoDu='" + sodu + "'where MaKH='" + txtmaKH.Text + "'";
                 phieuRutTien pr = new phieuRutTien();
                 pr.maPhieu = lblMaPhieuRut3.Text;
                 pr.maKH = txtmaKH.Text;
@@ -1256,7 +1267,12 @@ namespace Thong_Tin_Khach_hang
                 pr.soTienRut = decimal.Parse(txtNapTien.Text);
                 pr.maNV = MainFormManager.Instance.maNV();
                 pr.noiDungGiaoDich = "Rút tiền trong tài khoản";
-                if (edit.InsertphieuRutTien(pr) && dataProvider.Instance.ExecuteNonQuery(query) != 0)
+                giaoDich = new GiaoDich();
+                giaoDich.makh = txtmaKH.Text;
+                giaoDich.sodu = sodu;
+                giaoDich.pr = pr;
+                bool success = giaoDich.GiaoDichRutTien();
+                if (success)
                 {
                     Print(panel7);
                     MessageBox.Show("Giao dịch thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1265,6 +1281,7 @@ namespace Thong_Tin_Khach_hang
                 else
                 {
                     MessageBox.Show("Giao dịch thất bại, vui lòng thử lại sau", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
             }
             else
