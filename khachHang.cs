@@ -15,6 +15,58 @@ using System.Net.Mail;
 
 namespace Thong_Tin_Khach_hang
 {
+    public class STKFactory
+    {
+        public SoTietKiem createSoTietKiem(string stkType) 
+        {
+            SoTietKiem _stk = null;
+            switch (stkType)
+            {
+                case "Ngắn hạn":
+                    _stk = new STKNganHan();
+                    break;
+                case "Dài hạn": 
+                    _stk = new STKDaiHan();
+                    break;
+                case "Không thời hạn":
+                    _stk = new STKKhongThoiHan();
+                    break;
+            }
+            return _stk;
+        }
+    }
+
+    public interface SoTietKiem
+    {
+        Passbook moSoTietKiem(Passbook pb );
+    }
+
+    public class STKKhongThoiHan : SoTietKiem
+    {
+        public Passbook moSoTietKiem( Passbook pb ) 
+        {
+            pb.maLoaiTK = "L01";
+            return pb;
+        }
+    }
+
+    public class STKNganHan : SoTietKiem
+    {
+        public Passbook moSoTietKiem( Passbook pb )
+        {
+            pb.maLoaiTK = "L02";
+            return pb;
+        }
+    }
+
+    public class STKDaiHan : SoTietKiem
+    {
+        public Passbook moSoTietKiem( Passbook pb )
+        {
+            pb.maLoaiTK = "L03";
+            return pb;
+        }
+    }
     public partial class frmthongTinKhachHang : Form
     {
         DataTable dt = new DataTable();
@@ -1088,51 +1140,69 @@ namespace Thong_Tin_Khach_hang
                 }
             }
         }
+
+        /// Mở sổ
         private void iconButton4_Click(object sender, EventArgs e)
         {
             string query = "SELECT MaLoaiTK from LOAITIETKIEM where TenLoaiTK=N'" + cboloaiTietKiem.Text + "'";
             string st = "SELECT * FROM  SOTIETKIEM WHERE MaSoTK ='" + lblmaso2.Text + "' ";
             if (!b)
             {
+                string maLoaiTK = dataProvider.Instance.ExecuteScalar(query).ToString();
+
+                Passbook pb = new Passbook();
+                pb.maSoTK = lblmaso2.Text;
+                pb.maKH = txtmaKH1.Text;
+                pb.maNV = MainFormManager.Instance.maNV();
+                pb.maChiNhanh = MainFormManager.Instance.maCN();
+                pb.ngayMoSo = dtmngayMoSo.Value;
+                pb.soDuSo = decimal.Parse(txtTienMoSo.Text);
+                pb.hinhThucTraLai = cboHinhThucTraLai.Text;
+                pb.soLanGiaHan = 0;
+                decimal sodu = decimal.Parse(txtSoDu1.Text) - decimal.Parse(txtTienMoSo.Text);
+                string query2 = "update KHACHHANG set SoDu=" + sodu + "where MaKH='" + lblmakh2.Text + "'";
+
+                phieuRutTien pr = new phieuRutTien();
+                pr.maPhieu = Random().ToString();
+                pr.maKH = txtmaKH.Text;
+                pr.maCN = MainFormManager.Instance.maCN();
+                pr.ngayRut = dtmngayMoSo.Value;
+                pr.soTienRut = decimal.Parse(txtTienMoSo.Text);
+                pr.maNV = MainFormManager.Instance.maNV();
+                pr.noiDungGiaoDich = "Nộp tiền vào sổ tiết kiệm";
+
                 while (CheckMa(st))
                 {
-                   
-                        Passbook pb = new Passbook();
-                        pb.maSoTK = lblmaso2.Text;
-                        pb.maKH = txtmaKH1.Text;
-                        pb.maLoaiTK = dataProvider.Instance.ExecuteScalar(query).ToString();
-                        pb.maNV = MainFormManager.Instance.maNV();
-                        pb.maChiNhanh = MainFormManager.Instance.maCN();
-                        pb.ngayMoSo = dtmngayMoSo.Value;
-                        pb.soDuSo = decimal.Parse(txtTienMoSo.Text);
-                        pb.hinhThucTraLai = cboHinhThucTraLai.Text;
-                        pb.soLanGiaHan = 0;
-                        decimal sodu = decimal.Parse(txtSoDu1.Text) - decimal.Parse(txtTienMoSo.Text);
-                        string query2 = "update KHACHHANG set SoDu=" + sodu + "where MaKH='" + lblmakh2.Text + "'";
-
-                        phieuRutTien pr = new phieuRutTien();
-                        pr.maPhieu = Random().ToString();
-                        pr.maKH = txtmaKH.Text;
-                        pr.maCN = MainFormManager.Instance.maCN();
-                        pr.ngayRut = dtmngayMoSo.Value;
-                        pr.soTienRut = decimal.Parse(txtTienMoSo.Text);
-                        pr.maNV = MainFormManager.Instance.maNV();
-                        pr.noiDungGiaoDich = "Nộp tiền vào sổ tiết kiệm";
-                        if (edit.InsertPassBook(pb) && dataProvider.Instance.ExecuteNonQuery(query2) != 0 && edit.InsertphieuRutTien(pr))
-                        {
-                            b = true;
-                            Print(pnlPrint);
-                            TuDongGoiMail();
-                            MessageBox.Show("mở sổ thành công!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            reload();
-                            reload1();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Vui lòng kiểm tra lại thông tin!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-
-                   
+                    STKFactory factory = new STKFactory();
+                    SoTietKiem stk = null;
+                    switch (cboloaiTietKiem.Text)
+                    {
+                        case "Không thời hạn":
+                            stk = factory.createSoTietKiem("Không thời hạn");
+                            pb = stk.moSoTietKiem(pb);
+                            break;
+                        case "Ngắn hạn":
+                            stk = factory.createSoTietKiem("Ngắn hạn");
+                            pb = stk.moSoTietKiem(pb);
+                            break;
+                        case "Dài hạn":
+                            stk = factory.createSoTietKiem("Dài hạn");
+                            pb = stk.moSoTietKiem(pb);
+                            break;
+                    }
+                    if (edit.InsertPassBook(pb) && dataProvider.Instance.ExecuteNonQuery(query2) != 0 && edit.InsertphieuRutTien(pr))
+                    {
+                        b = true;
+                        Print(pnlPrint);
+                        TuDongGoiMail();
+                        MessageBox.Show("Mở sổ thành công!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        reload();
+                        reload1();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng kiểm tra lại thông tin!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             else
@@ -1140,6 +1210,7 @@ namespace Thong_Tin_Khach_hang
                 Print(pnlPrint);
             }
         }
+        
         void TuDongGoiMail()// thêm thông tin tk bên sendmail mở tk
         {
             string query0 = "SELECT MaSoTK,TenKH,NgayMoSo,ThoiHan,LaiXuat,HinhThucTraLai,Email From SOTIETKIEM STK, LOAITIETKIEM LTK, KHACHHANG KH where SoVon<>'0' AND STK.MaLoaiTK=LTK.MaLoaiTK AND KH.MaKH=STK.MaKH";
