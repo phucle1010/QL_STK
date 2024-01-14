@@ -1242,12 +1242,74 @@ namespace Thong_Tin_Khach_hang
             ShowData();
         }
 
+
+        // chain of responsibility
+        public interface ITransactionHandler
+        {
+            bool HandleTransaction(phieuRutTien phieu, string query);
+        }
+
+        public class DatabaseTransactionHandler : ITransactionHandler
+        {
+            private ITransactionHandler nextHandler;
+            private frmthongTinKhachHang formInstance;
+
+            public DatabaseTransactionHandler(frmthongTinKhachHang instance)
+            {
+                formInstance = instance;
+            }
+            public void SetNextHandler(ITransactionHandler handler)
+            {
+                nextHandler = handler;
+            }
+
+            public bool HandleTransaction(phieuRutTien phieu, string query)
+            {
+                // Perform database transaction here
+                decimal sodu = decimal.Parse(formInstance.txtSoDu.Text) - decimal.Parse(formInstance.txtNapTien.Text);
+                string databaseQuery = "update KHACHHANG set SoDu='" + sodu + "'where MaKH='" + formInstance.txtmaKH.Text + "'";
+
+                if (dataProvider.Instance.ExecuteNonQuery(databaseQuery) != 0)
+                {
+                    if (nextHandler != null)
+                    {
+                        return nextHandler.HandleTransaction(phieu, query);
+                    }
+
+                    return true;
+                }
+
+                return false;
+            }
+        }
+        public class PrintTransactionHandler : ITransactionHandler
+        {
+            private ITransactionHandler nextHandler;
+            private frmthongTinKhachHang formInstance;
+            public void SetNextHandler(ITransactionHandler handler)
+            {
+                nextHandler = handler;
+            }
+            public PrintTransactionHandler(frmthongTinKhachHang instance)
+            {
+                formInstance = instance;
+            }
+            public bool HandleTransaction(phieuRutTien phieu, string query)
+            {
+                // Perform printing here
+                formInstance.Print(formInstance.panel7);
+                if (nextHandler != null)
+                {
+                    return nextHandler.HandleTransaction(phieu, query);
+                }
+                return true;
+            }
+        }
+
         private void iconButton11_Click_1(object sender, EventArgs e)
         {
             if (!b)
             {
-                decimal sodu = decimal.Parse(txtSoDu.Text) - decimal.Parse(txtNapTien.Text);
-                string query = "update KHACHHANG set SoDu='" + sodu + "'where MaKH='" + txtmaKH.Text + "'";
                 phieuRutTien pr = new phieuRutTien();
                 pr.maPhieu = lblMaPhieuRut3.Text;
                 pr.maKH = txtmaKH.Text;
@@ -1256,25 +1318,37 @@ namespace Thong_Tin_Khach_hang
                 pr.soTienRut = decimal.Parse(txtNapTien.Text);
                 pr.maNV = MainFormManager.Instance.maNV();
                 pr.noiDungGiaoDich = "Rút tiền trong tài khoản";
-                if (edit.InsertphieuRutTien(pr) && dataProvider.Instance.ExecuteNonQuery(query) != 0)
+
+                PrintTransactionHandler printHandler = new PrintTransactionHandler(this);
+                DatabaseTransactionHandler dbHandler = new DatabaseTransactionHandler(this);
+
+                // Thiết lập chuỗi Chain of Responsibility
+                printHandler.SetNextHandler(dbHandler);
+                
+                if (printHandler.HandleTransaction(pr, ""))
                 {
-                    Print(panel7);
-                    MessageBox.Show("Giao dịch thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    b = true;
+                    decimal sodu = decimal.Parse(txtSoDu.Text) - decimal.Parse(txtNapTien.Text);
+                    string query = "update KHACHHANG set SoDu='" + sodu + "'where MaKH='" + txtmaKH.Text + "'";
+
+                    if (dbHandler.HandleTransaction(pr, query))
+                    {
+                        MessageBox.Show("Giao dịch thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        b = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Giao dịch thất bại, vui lòng thử lại sau", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Giao dịch thất bại, vui lòng thử lại sau", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+
             }
             else
             {
                 Print(panel7);
             }
-
         }
 
-        private void txtTienMoSo_TextChanged(object sender, EventArgs e)
+            private void txtTienMoSo_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtTienMoSo.Text))
             {

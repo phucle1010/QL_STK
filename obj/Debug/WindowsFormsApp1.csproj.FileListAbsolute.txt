@@ -263,3 +263,28 @@ D:\QLSTK_MTK\QL_STK\bin\Debug\WindowsFormsApp1.exe
 D:\QLSTK_MTK\QL_STK\bin\Debug\WindowsFormsApp1.pdb
 D:\QLSTK_MTK\QL_STK\bin\Debug\FontAwesome.Sharp.dll
 D:\QLSTK_MTK\QL_STK\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\bin\Debug\WindowsFormsApp1.exe.config
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\bin\Debug\WindowsFormsApp1.exe
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\bin\Debug\WindowsFormsApp1.pdb
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\bin\Debug\FontAwesome.Sharp.dll
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.csproj.SuggestedBindingRedirects.cache
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\Lần_1.ChinhSuaLoaiTK.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.frmAccount.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.frmDoanhSoNgay.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.frmForgotPassWord.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\Lần_1.FrmNhanVien.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.frmThongtinso.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.frmTopKhachHang.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\Thong_Tin_Khach_hang.frmthongTinKhachHang.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.MainFormManager.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.ForgotPass.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.Login.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.RJControls.RjTextBox.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\Lần_1.ThongTinChinhSach.resources
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.exe
+D:\Nam4\Mẫu thiết kế\Project\UpDate\QL_STK\obj\Debug\WindowsFormsApp1.pdb
