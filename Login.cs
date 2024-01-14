@@ -15,19 +15,19 @@ namespace WindowsFormsApp1
 {
     public interface IAuthenticationService
     {
-        bool Authenticate( string username, string password );
-        bool IsValidatedData( string username, string password );
+        bool Authenticate(string username, string password);
+        bool IsValidatedData(string username, string password);
     }
 
     public class RealAuthenticationService : IAuthenticationService
     {
-        public bool Authenticate( string username, string password )
+        public bool Authenticate(string username, string password)
         {
             string query = "select MatKhau,SDT from NHANVIEN where SDT='" + username + "' and MatKhau='" + password + "'";
             return dataProvider.Instance.ExecuteReader(query);
         }
 
-        public bool IsValidatedData( string username, string password )
+        public bool IsValidatedData(string username, string password)
         {
             return false;
         }
@@ -43,10 +43,10 @@ namespace WindowsFormsApp1
             this.realAuthenticationService = new RealAuthenticationService();
         }
 
-        public bool Authenticate( string username, string password )
+        public bool Authenticate(string username, string password)
         {
             // Kiểm tra điều kiện trước khi thực hiện login
-            if (IsValidatedData(username, password))
+            if (realAuthenticationService.IsValidatedData(username, password))
             {
                 // Nếu điều kiện hợp lệ, chuyển gọi đến đối tượng thực
                 return realAuthenticationService.Authenticate(username, password);
@@ -54,7 +54,7 @@ namespace WindowsFormsApp1
             return false;
         }
 
-        public bool IsValidatedData( string username, string password )
+        public bool IsValidatedData(string username, string password)
         {
             if (
                 username == "Phone Number" ||
@@ -72,7 +72,6 @@ namespace WindowsFormsApp1
 
     public partial class Login : Form
     {
-
         public static string sdt = "";
         private bool check = false;
         IAuthenticationService authenticationService = new AuthenticationProxy();
@@ -84,7 +83,7 @@ namespace WindowsFormsApp1
         }
 
 
-        private void rjTextBox1_Enter( object sender, EventArgs e )
+        private void rjTextBox1_Enter(object sender, EventArgs e)
         {
             this.isValidAccount();
             if (txtSDT.Text == "Phone Number")
@@ -92,9 +91,10 @@ namespace WindowsFormsApp1
                 txtSDT.Text = "";
                 txtSDT.ForeColor = Color.Black;
             }
+            this.isValidAccount();
         }
 
-        private void txtGmail_Leave( object sender, EventArgs e )
+        private void txtGmail_Leave(object sender, EventArgs e)
         {
             this.isValidAccount();
             if (txtSDT.Text == "")
@@ -102,9 +102,10 @@ namespace WindowsFormsApp1
                 txtSDT.Text = "Phone Number";
                 txtSDT.ForeColor = Color.FromArgb(64, 64, 64);
             }
+            this.isValidAccount();
         }
 
-        private void txtMatKhau_Leave( object sender, EventArgs e )
+        private void txtMatKhau_Leave(object sender, EventArgs e)
         {
             this.isValidAccount();
             if (txtMatKhau.Text == "")
@@ -114,9 +115,10 @@ namespace WindowsFormsApp1
                 txtMatKhau.ForeColor = Color.FromArgb(64, 64, 64);
                 txtMatKhau.PasswordChar = '\0';
             }
+            this.isValidAccount();
         }
 
-        private void txtMatKhau_Enter( object sender, EventArgs e )
+        private void txtMatKhau_Enter(object sender, EventArgs e)
         {
             this.isValidAccount();
             if (txtMatKhau.Text == "Password")
@@ -124,10 +126,11 @@ namespace WindowsFormsApp1
                 txtMatKhau.Text = "";
                 txtMatKhau.ForeColor = Color.Black;
             }
+            this.isValidAccount();
         }
 
 
-        private void txtMatKhau_TextChanged( object sender, EventArgs e )
+        private void txtMatKhau_TextChanged(object sender, EventArgs e)
         {
             if (txtMatKhau.Text == "" || txtMatKhau.Text == "Password")
             {
@@ -152,7 +155,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void rjButton1_Click( object sender, EventArgs e )
+        private void rjButton1_Click(object sender, EventArgs e)
         {
             // Thực hiện login thông qua Proxy
             bool result = authenticationService.Authenticate(txtSDT.Text, txtMatKhau.Text);
@@ -198,7 +201,7 @@ namespace WindowsFormsApp1
             Application.Run(new MainFormManager());
         }
 
-        private void Login_Load( object sender, EventArgs e )
+        private void Login_Load(object sender, EventArgs e)
         {
             lblerror.Hide();
             ptbeye.Hide();
@@ -206,17 +209,17 @@ namespace WindowsFormsApp1
             this.ActiveControl = label1;
         }
 
-        private void txtGmail_TextChanged( object sender, EventArgs e )
+        private void txtGmail_TextChanged(object sender, EventArgs e)
         {
             lblerror.Hide();
         }
 
-        private void iconPictureBox3_Click( object sender, EventArgs e )
+        private void iconPictureBox3_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void ptbeyeslash_Click( object sender, EventArgs e )
+        private void ptbeyeslash_Click(object sender, EventArgs e)
         {
             check = true;
             ptbeyeslash.Hide();
@@ -224,7 +227,7 @@ namespace WindowsFormsApp1
             txtMatKhau.PasswordChar = '\0';
         }
 
-        private void ptbeye_Click( object sender, EventArgs e )
+        private void ptbeye_Click(object sender, EventArgs e)
         {
             check = false;
             ptbeye.Hide();
@@ -232,14 +235,14 @@ namespace WindowsFormsApp1
             txtMatKhau.PasswordChar = '*';
         }
 
-        private void linkLabel1_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e )
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmForgotPassWord fg = new frmForgotPassWord();
             fg.Show();
             this.Hide();
         }
 
-        private void pictureBox1_Click( object sender, EventArgs e )
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

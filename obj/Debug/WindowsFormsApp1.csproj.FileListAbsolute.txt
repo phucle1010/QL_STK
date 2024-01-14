@@ -251,9 +251,9 @@ D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\Window
 D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\Lần_1.FrmNhanVien.resources
 D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.frmThongtinso.resources
 D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.frmTopKhachHang.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\Thong_Tin_Khach_hang.frmthongTinKhachHang.resources
 D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.MainFormManager.resources
 D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.ForgotPass.resources
-D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.RealAuthenticationService.resources
 D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
 D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.RJControls.RjTextBox.resources
 D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\Lần_1.ThongTinChinhSach.resources
@@ -262,4 +262,4 @@ D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\Window
 D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
 D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.exe
 D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.pdb
-D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\Thong_Tin_Khach_hang.STKFactory.resources
+D:\Subject\Design Pattern\Đồ án\QL_SoTietKiem\Giaodienchinh\obj\Debug\WindowsFormsApp1.RealAuthenticationService.resources

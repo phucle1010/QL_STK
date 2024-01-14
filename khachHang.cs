@@ -17,7 +17,7 @@ namespace Thong_Tin_Khach_hang
 {
     public class STKFactory
     {
-        public SoTietKiem createSoTietKiem(string stkType) 
+        public SoTietKiem createSoTietKiem(string stkType)
         {
             SoTietKiem _stk = null;
             switch (stkType)
@@ -25,7 +25,7 @@ namespace Thong_Tin_Khach_hang
                 case "Ngắn hạn":
                     _stk = new STKNganHan();
                     break;
-                case "Dài hạn": 
+                case "Dài hạn":
                     _stk = new STKDaiHan();
                     break;
                 case "Không thời hạn":
@@ -38,12 +38,12 @@ namespace Thong_Tin_Khach_hang
 
     public interface SoTietKiem
     {
-        Passbook moSoTietKiem(Passbook pb );
+        Passbook moSoTietKiem(Passbook pb);
     }
 
     public class STKKhongThoiHan : SoTietKiem
     {
-        public Passbook moSoTietKiem( Passbook pb ) 
+        public Passbook moSoTietKiem(Passbook pb)
         {
             pb.maLoaiTK = "L01";
             return pb;
@@ -52,7 +52,7 @@ namespace Thong_Tin_Khach_hang
 
     public class STKNganHan : SoTietKiem
     {
-        public Passbook moSoTietKiem( Passbook pb )
+        public Passbook moSoTietKiem(Passbook pb)
         {
             pb.maLoaiTK = "L02";
             return pb;
@@ -61,14 +61,16 @@ namespace Thong_Tin_Khach_hang
 
     public class STKDaiHan : SoTietKiem
     {
-        public Passbook moSoTietKiem( Passbook pb )
+        public Passbook moSoTietKiem(Passbook pb)
         {
             pb.maLoaiTK = "L03";
             return pb;
         }
     }
+
     public partial class frmthongTinKhachHang : Form
     {
+        GiaoDich giaoDich;
         DataTable dt = new DataTable();
         editPerson edit = new editPerson();
         DateTime date = DateTime.Now;
@@ -132,7 +134,7 @@ namespace Thong_Tin_Khach_hang
             cboTraCuu.Text = "Tên khách hàng";
             btnXacNhan.Hide();
             btnHuyBo.Hide();
-            
+
 
         }
         //Chọn khách hàng mở sổ
@@ -235,13 +237,13 @@ namespace Thong_Tin_Khach_hang
 
         private void iconButton5_Click(object sender, EventArgs e)
         {
-            
+
             reload1();
             txtTienMoSo.Enabled = true;
             cboloaiTietKiem.Enabled = true;
             tabControl1.TabPages.Remove(tabPage2);
             tabControl1.TabPages.Add(tabPage1);
-            
+
         }
         bool CheckMa(string st)
         {
@@ -269,7 +271,7 @@ namespace Thong_Tin_Khach_hang
                 txtcccd.Focus();
                 return false;
             }
-            else if (txtcccd.Text.Length != 12 && txtcccd.Text.Length!=9)
+            else if (txtcccd.Text.Length != 12 && txtcccd.Text.Length != 9)
             {
                 MessageBox.Show("CCCD không hợp lệ", "thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -635,7 +637,6 @@ namespace Thong_Tin_Khach_hang
             if (!b)
             {
                 decimal sodu = decimal.Parse(txtNapTien.Text) + decimal.Parse(txtSoDu.Text);
-                string query = "update KHACHHANG set SoDu=" + sodu + "where MaKH='" + txtmaKH.Text + "'";
                 phieuGuiTien pg = new phieuGuiTien();
                 pg.maPhieu = lblMaPhieuGui.Text;
                 pg.maKH = txtmaKH.Text;
@@ -644,7 +645,12 @@ namespace Thong_Tin_Khach_hang
                 pg.soTienGui = decimal.Parse(txtNapTien.Text);
                 pg.maNV = MainFormManager.Instance.maNV();
                 pg.noiDungGiaoDich = "Nộp tiền vào tài khoản";
-                if (edit.InsertphieuGuiTien(pg) && dataProvider.Instance.ExecuteNonQuery(query) != 0)
+                giaoDich = new GiaoDich();
+                giaoDich.makh = txtmaKH.Text;
+                giaoDich.sodu = sodu;
+                giaoDich.pg = pg;
+                bool success = giaoDich.GiaoDichGuiTien();
+                if (success)
                 {
                     Print(panel11);
                     MessageBox.Show("Giao dịch thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -653,6 +659,7 @@ namespace Thong_Tin_Khach_hang
                 else
                 {
                     MessageBox.Show("Giao dịch thất bại, vui lòng thử lại sau", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
             }
             else
@@ -910,48 +917,48 @@ namespace Thong_Tin_Khach_hang
         {
             if (string.IsNullOrEmpty(txtmaKH.Text))
             {
-                MessageBox.Show("Vui lòng chọn khách hàng cần tra cứu","Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vui lòng chọn khách hàng cần tra cứu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 string query0 = "SELECT MaSoTK,NgayMoSo,ThoiHan,LaiXuat,SoVon,HinhThucTraLai,MaKH,SoLanGiaHan From SOTIETKIEM STK, LOAITIETKIEM LTK where SoVon<>'0' AND STK.MaLoaiTK=LTK.MaLoaiTK AND MaKH='" + txtmaKH.Text + "'";
                 dgv1.DataSource = dataProvider.Instance.ExecuteQuery(query0);
-               
+
                 for (int i = 0; i < dgv1.Rows.Count; i++)
                 {
-                    
-                    
-                    
-                       
-                        if (dgv1.Rows[i].Cells[5].Value.ToString() == "Tất toán sổ ")
+
+
+
+
+                    if (dgv1.Rows[i].Cells[5].Value.ToString() == "Tất toán sổ ")
+                    {
+
+                        DateTime ngaygoi = DateTime.Parse(dgv1.Rows[i].Cells[1].Value.ToString());
+                        int thangTH;
+                        bool a = int.TryParse(dgv1.Rows[i].Cells[2].Value.ToString(), out thangTH);
+                        DateTime ngaydh = ngaygoi.AddDays(30 * thangTH);
+
+                        if (DateTime.Today >= ngaydh)
                         {
-                            
-                            DateTime ngaygoi = DateTime.Parse(dgv1.Rows[i].Cells[1].Value.ToString());
-                            int thangTH;
-                            bool a = int.TryParse(dgv1.Rows[i].Cells[2].Value.ToString(), out thangTH);
-                            DateTime ngaydh = ngaygoi.AddDays(30 * thangTH);
-                           
-                            if (DateTime.Today >= ngaydh)
+                            ulong tiengoc = (ulong)(float.Parse(dgv1.Rows[i].Cells[4].Value.ToString()));
+                            float laisuatKH = float.Parse(dgv1.Rows[i].Cells[3].Value.ToString());
+                            ulong laisuat = (ulong)(tiengoc * (laisuatKH / 100));
+                            string sodubd = dataProvider.Instance.ExecuteScalar("SELECT SoDu From KHACHHANG where MaKH='" + dgv1.Rows[i].Cells[6].Value.ToString() + "'").ToString();
+                            decimal sodusau = decimal.Parse(sodubd) + (decimal)tiengoc + (decimal)laisuat;
+                            string st1 = "UPDATE SOTIETKIEM SET SoVon='0' WHERE MaSoTK='" + dgv1.Rows[i].Cells[0].Value.ToString() + "'";
+                            string query2 = "update KHACHHANG set SoDu='" + sodusau + "'where MaKH='" + dgv1.Rows[i].Cells[6].Value.ToString() + "'";
+                            string maPhieu = Random().ToString();
+                            string st = "SELECT * FROM PHIEUGOITIEN WHERE MaPhieu='" + maPhieu + "' ";
+                            while (!CheckMa(st))
                             {
-                                ulong tiengoc = (ulong)(float.Parse(dgv1.Rows[i].Cells[4].Value.ToString()));
-                                float laisuatKH = float.Parse(dgv1.Rows[i].Cells[3].Value.ToString());
-                                ulong laisuat = (ulong)(tiengoc * (laisuatKH / 100));
-                                string sodubd = dataProvider.Instance.ExecuteScalar("SELECT SoDu From KHACHHANG where MaKH='" + dgv1.Rows[i].Cells[6].Value.ToString() + "'").ToString();
-                                decimal sodusau = decimal.Parse(sodubd) + (decimal)tiengoc + (decimal)laisuat;
-                                string st1 = "UPDATE SOTIETKIEM SET SoVon='0' WHERE MaSoTK='" + dgv1.Rows[i].Cells[0].Value.ToString() + "'";
-                                string query2 = "update KHACHHANG set SoDu='" + sodusau + "'where MaKH='" + dgv1.Rows[i].Cells[6].Value.ToString() + "'";
-                                string maPhieu = Random().ToString();
-                                string st = "SELECT * FROM PHIEUGOITIEN WHERE MaPhieu='" + maPhieu + "' ";
-                                while (!CheckMa(st))
-                                {
-                                    maPhieu = Random().ToString();
-                                }
-                                string query3 = "INSERT INTO PHIEUGOITIEN (MaPhieu,MaKH,MaNV,NgayGoi,SoTienGoi,MaCN,NoiDungGiaoDich) VALUES('" + maPhieu + "','" + dgv1.Rows[i].Cells[6].Value.ToString() + "','" + MainFormManager.Instance.maNV().ToString() + "','" + ngaydh.ToString("yyyy/MM/dd") + "','" + ((decimal)tiengoc + (decimal)laisuat) + "','" + MainFormManager.Instance.maCN().ToString() + "',N'Tất toán sổ tiết kiệm')";
-                                dataProvider.Instance.ExecuteNonQuery(st1);
-                                dataProvider.Instance.ExecuteNonQuery(query2);
-                                dataProvider.Instance.ExecuteNonQuery(query3);
+                                maPhieu = Random().ToString();
                             }
+                            string query3 = "INSERT INTO PHIEUGOITIEN (MaPhieu,MaKH,MaNV,NgayGoi,SoTienGoi,MaCN,NoiDungGiaoDich) VALUES('" + maPhieu + "','" + dgv1.Rows[i].Cells[6].Value.ToString() + "','" + MainFormManager.Instance.maNV().ToString() + "','" + ngaydh.ToString("yyyy/MM/dd") + "','" + ((decimal)tiengoc + (decimal)laisuat) + "','" + MainFormManager.Instance.maCN().ToString() + "',N'Tất toán sổ tiết kiệm')";
+                            dataProvider.Instance.ExecuteNonQuery(st1);
+                            dataProvider.Instance.ExecuteNonQuery(query2);
+                            dataProvider.Instance.ExecuteNonQuery(query3);
                         }
+                    }
                     if (dgv1.Rows[i].Cells[5].Value.ToString() == "Lãi trả vào tài khoản khách hàng ")
                     {
 
@@ -989,7 +996,7 @@ namespace Thong_Tin_Khach_hang
                             solangiahan++;
                         }
                     }
-                   
+
                 }
 
                 //TuDongGiaHan(txtmaKH.Text);
@@ -1011,13 +1018,13 @@ namespace Thong_Tin_Khach_hang
                 tabControl1.TabPages.Remove(tabPage2);
                 tabControl1.TabPages.Add(tabPage6);
                 //lịch sử GD
-                
+
             }
         }
 
-        void TuDongGiaHan( string maKH) // thêm  chia 100 hàm tính lãi của cái đầu và cái cuối
+        void TuDongGiaHan(string maKH) // thêm  chia 100 hàm tính lãi của cái đầu và cái cuối
         {
-            
+
 
             MessageBox.Show(dgv1.Rows.Count.ToString());
 
@@ -1078,10 +1085,10 @@ namespace Thong_Tin_Khach_hang
                     if (dgv1.Rows[i].Cells[5].Value.ToString() == "Tất toán sổ")
                     {
                         MessageBox.Show("tất toán sổ");
-                        DateTime ngaygoi = DateTime.Parse(dgv1.Rows[i].Cells[1].Value.ToString());                      
+                        DateTime ngaygoi = DateTime.Parse(dgv1.Rows[i].Cells[1].Value.ToString());
                         DateTime ngaydh = ngaygoi.AddSeconds(5);
                         MessageBox.Show(ngaydh.ToString());
-                        if (DateTime.Now>= ngaydh)
+                        if (DateTime.Now >= ngaydh)
                         {
                             MessageBox.Show("đã đáo hạn");
                             ulong tiengoc = (ulong)(float.Parse(dgv1.Rows[i].Cells[4].Value.ToString()));
@@ -1108,9 +1115,9 @@ namespace Thong_Tin_Khach_hang
                         DateTime ngaygoi = DateTime.Parse(dgv1.Rows[i].Cells[1].Value.ToString());
                         TimeSpan interval = DateTime.Now.Subtract(ngaygoi);
                         int thangGoi = (int)(interval.Seconds);
-                        int thangTH=5;                       
+                        int thangTH = 5;
                         int soKH1 = (int)(thangGoi / thangTH);
-                        DateTime ngaydh = ngaygoi.AddSeconds( thangTH * soKH1);
+                        DateTime ngaydh = ngaygoi.AddSeconds(thangTH * soKH1);
                         int solangiahan;
                         a = int.TryParse(dgv1.Rows[i].Cells[7].Value.ToString(), out solangiahan);
                         while (DateTime.Now >= ngaydh && solangiahan < soKH1)
@@ -1161,16 +1168,6 @@ namespace Thong_Tin_Khach_hang
                 pb.soLanGiaHan = 0;
                 decimal sodu = decimal.Parse(txtSoDu1.Text) - decimal.Parse(txtTienMoSo.Text);
                 string query2 = "update KHACHHANG set SoDu=" + sodu + "where MaKH='" + lblmakh2.Text + "'";
-
-                phieuRutTien pr = new phieuRutTien();
-                pr.maPhieu = Random().ToString();
-                pr.maKH = txtmaKH.Text;
-                pr.maCN = MainFormManager.Instance.maCN();
-                pr.ngayRut = dtmngayMoSo.Value;
-                pr.soTienRut = decimal.Parse(txtTienMoSo.Text);
-                pr.maNV = MainFormManager.Instance.maNV();
-                pr.noiDungGiaoDich = "Nộp tiền vào sổ tiết kiệm";
-
                 while (CheckMa(st))
                 {
                     STKFactory factory = new STKFactory();
@@ -1190,7 +1187,13 @@ namespace Thong_Tin_Khach_hang
                             pb = stk.moSoTietKiem(pb);
                             break;
                     }
-                    if (edit.InsertPassBook(pb) && dataProvider.Instance.ExecuteNonQuery(query2) != 0 && edit.InsertphieuRutTien(pr))
+                    giaoDich = new GiaoDich();
+                    giaoDich.pb = pb;
+                    giaoDich.pr = pr;
+                    giaoDich.sodu = sodu;
+                    giaoDich.makh = lblmakh2.Text;
+                    bool success = giaoDich.GiaoDichMoSo();
+                    if (edit.InsertPassBook(pb) && dataProvider.Instance.ExecuteNonQuery(query2) != 0 && edit.InsertphieuRutTien(pr) && success)
                     {
                         b = true;
                         Print(pnlPrint);
@@ -1205,24 +1208,19 @@ namespace Thong_Tin_Khach_hang
                     }
                 }
             }
-            else
-            {
-                Print(pnlPrint);
-            }
         }
-        
         void TuDongGoiMail()// thêm thông tin tk bên sendmail mở tk
         {
             string query0 = "SELECT MaSoTK,TenKH,NgayMoSo,ThoiHan,LaiXuat,HinhThucTraLai,Email From SOTIETKIEM STK, LOAITIETKIEM LTK, KHACHHANG KH where SoVon<>'0' AND STK.MaLoaiTK=LTK.MaLoaiTK AND KH.MaKH=STK.MaKH";
             dgv2.DataSource = dataProvider.Instance.ExecuteQuery(query0);
             //MessageBox.Show(dgv2.Rows.Count.ToString());
-            for (int i = 0; i < dgv2.Rows.Count-1; i++)
+            for (int i = 0; i < dgv2.Rows.Count - 1; i++)
             {
-               
+
                 DateTime ngaygoi;
                 int thangTH;
                 DateTime ngaydh;
-                if (dgv2.Rows[i].Cells[5].Value.ToString() == "Tất toán sổ ")                 
+                if (dgv2.Rows[i].Cells[5].Value.ToString() == "Tất toán sổ ")
                 {
                     //MessageBox.Show("tất toán sổ");
                     ngaygoi = DateTime.Parse(dgv2.Rows[i].Cells[2].Value.ToString());
@@ -1318,7 +1316,6 @@ namespace Thong_Tin_Khach_hang
             if (!b)
             {
                 decimal sodu = decimal.Parse(txtSoDu.Text) - decimal.Parse(txtNapTien.Text);
-                string query = "update KHACHHANG set SoDu='" + sodu + "'where MaKH='" + txtmaKH.Text + "'";
                 phieuRutTien pr = new phieuRutTien();
                 pr.maPhieu = lblMaPhieuRut3.Text;
                 pr.maKH = txtmaKH.Text;
@@ -1327,7 +1324,12 @@ namespace Thong_Tin_Khach_hang
                 pr.soTienRut = decimal.Parse(txtNapTien.Text);
                 pr.maNV = MainFormManager.Instance.maNV();
                 pr.noiDungGiaoDich = "Rút tiền trong tài khoản";
-                if (edit.InsertphieuRutTien(pr) && dataProvider.Instance.ExecuteNonQuery(query) != 0)
+                giaoDich = new GiaoDich();
+                giaoDich.makh = txtmaKH.Text;
+                giaoDich.sodu = sodu;
+                giaoDich.pr = pr;
+                bool success = giaoDich.GiaoDichRutTien();
+                if (success)
                 {
                     Print(panel7);
                     MessageBox.Show("Giao dịch thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1336,6 +1338,7 @@ namespace Thong_Tin_Khach_hang
                 else
                 {
                     MessageBox.Show("Giao dịch thất bại, vui lòng thử lại sau", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
             }
             else
