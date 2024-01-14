@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Thong_Tin_Khach_hang
 {
-    internal class phieuGuiTien
+    public class phieuGuiTien
     {
         public string maPhieu { get; set; }
         public string maKH { get; set; }

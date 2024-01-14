@@ -16,6 +16,7 @@ namespace WindowsFormsApp1
 {
     public partial class frmThongtinso : Form
     {
+        GiaoDich giaoDich;
         DataTable dt = new DataTable();
         bool loaded = false;
         DataTable dt1 = new DataTable();
@@ -486,7 +487,32 @@ namespace WindowsFormsApp1
                 btTatToan.Show();
             }
         }
-
+        bool tatToan()
+        {
+            string sodubd = dataProvider.Instance.ExecuteScalar("SELECT SoDu From KHACHHANG where MaKH='" + txtmaKH1.Text + "'").ToString();
+            decimal sodu = decimal.Parse(sodubd) + decimal.Parse(tbTongTien.Text);
+            string maPhieu = Random().ToString();
+            string st = "SELECT * FROM PHIEUGOITIEN WHERE MaPhieu='" + maPhieu + "' ";
+            while (!CheckMa(st))
+            {
+                maPhieu = Random().ToString();
+            }
+            phieuGuiTien pg = new phieuGuiTien();
+            pg.maPhieu = maPhieu;
+            pg.maKH = txtmaKH1.Text;
+            pg.maCN = MainFormManager.Instance.maCN();
+            pg.ngayGui = DateTime.Today;
+            pg.soTienGui = decimal.Parse(tbTongTien.Text);
+            pg.maNV = MainFormManager.Instance.maNV();
+            pg.noiDungGiaoDich = "N'Tất toán sổ tiết kiệm";
+            giaoDich = new GiaoDich();
+            giaoDich.pg = pg;
+            giaoDich.makh = txtmaKH1.Text;
+            giaoDich.sodu = sodu;
+            giaoDich.maSTK = tbMS1.Text;
+            return giaoDich.GiaoDichDongSo();
+            
+        }
         private void btTatToan_Click(object sender, EventArgs e)
         {
             if (tbHinhTTL.Text == "Tất toán sổ ")
@@ -494,19 +520,7 @@ namespace WindowsFormsApp1
                 DialogResult dg = MessageBox.Show("Bạn có chắc chắn muốn tất toán sổ trước kì hạn?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dg == DialogResult.Yes)
                 {
-
-                    string sodubd = dataProvider.Instance.ExecuteScalar("SELECT SoDu From KHACHHANG where MaKH='" + txtmaKH1.Text + "'").ToString();
-                    decimal sodu = decimal.Parse(sodubd) + decimal.Parse(tbTongTien.Text);
-                    string query= "UPDATE SOTIETKIEM SET SoVon='0' WHERE MaSoTK='"+tbMS1.Text.ToString()+"'";
-                    string query1 = "update KHACHHANG set SoDu='" + sodu + "'where MaKH='" + txtmaKH1.Text + "'";
-                    string maPhieu = Random().ToString();
-                    string st = "SELECT * FROM PHIEUGOITIEN WHERE MaPhieu='" + maPhieu + "' ";
-                    while (!CheckMa(st))
-                    {
-                        maPhieu = Random().ToString();
-                    }
-                    string query2 = "INSERT INTO PHIEUGOITIEN (MaPhieu,MaKH,MaNV,NgayGoi,SoTienGoi,MaCN,NoiDungGiaoDich) VALUES('" + maPhieu + "','" + txtmaKH1.Text + "','" + MainFormManager.Instance.maNV().ToString() + "','" + DateTime.Today.ToString("yyyy/MM/dd") + "','" + decimal.Parse(tbTongTien.Text) + "','" + MainFormManager.Instance.maCN().ToString() + "',N'Tất toán sổ tiết kiệm')";
-                    if (dataProvider.Instance.ExecuteNonQuery(query) > 0 && dataProvider.Instance.ExecuteNonQuery(query1)>0 && dataProvider.Instance.ExecuteNonQuery(query2)>0)
+                    if (tatToan())
                     {
                         MessageBox.Show("Tất toán thành công, tiền gốc đã được chuyển vào tài khoản khách hàng!");
                     }
@@ -521,18 +535,7 @@ namespace WindowsFormsApp1
                 DialogResult dg = MessageBox.Show("Bạn có chắc chắn muốn tất toán sổ trước kì hạn?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dg == DialogResult.Yes)
                 {
-                    string sodubd = dataProvider.Instance.ExecuteScalar("SELECT SoDu From KHACHHANG where MaKH='" + txtmaKH1.Text + "'").ToString();
-                    decimal sodu = decimal.Parse(sodubd) + decimal.Parse(tbTongTien.Text);
-                    string query = "UPDATE SOTIETKIEM SET SoVon='0' WHERE MaSoTK='" + tbMS1.Text.ToString() + "'";
-                    string query1 = "update KHACHHANG set SoDu='" + sodu + "'where MaKH='" + txtmaKH1.Text + "'";
-                    string maPhieu = Random().ToString();
-                    string st = "SELECT * FROM PHIEUGOITIEN WHERE MaPhieu='" + maPhieu + "' ";
-                    while (!CheckMa(st))
-                    {
-                        maPhieu = Random().ToString();
-                    }
-                    string query2 = "INSERT INTO PHIEUGOITIEN (MaPhieu,MaKH,MaNV,NgayGoi,SoTienGoi,MaCN,NoiDungGiaoDich) VALUES('" + maPhieu + "','" + txtmaKH1.Text + "','" + MainFormManager.Instance.maNV().ToString() + "','" + DateTime.Today.ToString("yyyy/MM/dd") + "','" + decimal.Parse(tbTongTien.Text) + "','" + MainFormManager.Instance.maCN().ToString() + "',N'Tất toán sổ tiết kiệm')";
-                    if (dataProvider.Instance.ExecuteNonQuery(query) > 0 && dataProvider.Instance.ExecuteNonQuery(query1) > 0 && dataProvider.Instance.ExecuteNonQuery(query2) > 0)
+                    if (tatToan())
                     {
                         MessageBox.Show("Tất toàn thành công, tiền gốc đã được chuyển vào tài khoản khách hàng");
                     }
@@ -547,18 +550,7 @@ namespace WindowsFormsApp1
                 DialogResult dg = MessageBox.Show("Bạn có chắc chắn muốn tất toán sổ?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dg == DialogResult.Yes)
                 {
-                    string sodubd = dataProvider.Instance.ExecuteScalar("SELECT SoDu From KHACHHANG where MaKH='" + txtmaKH1.Text + "'").ToString();
-                    decimal sodu = decimal.Parse(sodubd) + decimal.Parse(tbTongTien.Text);
-                    string query = "UPDATE SOTIETKIEM SET SoVon='0' WHERE MaSoTK='" + tbMS1.Text.ToString() + "'";
-                    string query1 = "update KHACHHANG set SoDu='" + sodu + "'where MaKH='" + txtmaKH1.Text + "'";
-                    string maPhieu = Random().ToString();
-                    string st = "SELECT * FROM PHIEUGOITIEN WHERE MaPhieu='" + maPhieu + "' ";
-                    while (!CheckMa(st))
-                    {
-                        maPhieu = Random().ToString();
-                    }
-                    string query2 = "INSERT INTO PHIEUGOITIEN (MaPhieu,MaKH,MaNV,NgayGoi,SoTienGoi,MaCN,NoiDungGiaoDich) VALUES('" + maPhieu + "','" + txtmaKH1.Text + "','" + MainFormManager.Instance.maNV().ToString() + "','" + DateTime.Today.ToString("yyyy/MM/dd") + "','" + decimal.Parse(tbTongTien.Text) + "','" + MainFormManager.Instance.maCN().ToString() + "',N'Tất toán sổ tiết kiệm')";
-                    if (dataProvider.Instance.ExecuteNonQuery(query) > 0 && dataProvider.Instance.ExecuteNonQuery(query1) > 0 && dataProvider.Instance.ExecuteNonQuery(query2) > 0)
+                    if (tatToan())
                     {
                         MessageBox.Show("Tất toàn thành công, tiền gốc và lãi đã được chuyển vào tài khoản khách hàng");
                     }

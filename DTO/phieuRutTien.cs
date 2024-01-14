@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    internal class phieuRutTien
+    public class phieuRutTien
     {
         public string maPhieu { get; set; }
 
