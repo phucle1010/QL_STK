@@ -9,14 +9,73 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Thong_Tin_Khach_hang;
+using System.Text.RegularExpressions;
 
 namespace WindowsFormsApp1
 {
+    public interface IAuthenticationService
+    {
+        bool Authenticate( string username, string password );
+        bool IsValidatedData( string username, string password );
+    }
+
+    public class RealAuthenticationService : IAuthenticationService
+    {
+        public bool Authenticate( string username, string password ) {
+            string query = "select MatKhau,SDT from NHANVIEN where SDT='" + username + "' and MatKhau='" + password + "'";
+            return dataProvider.Instance.ExecuteReader(query);
+        }
+
+        public bool IsValidatedData( string username, string password )
+        {
+            return false;
+        }
+    }
+
+
+    public class AuthenticationProxy : IAuthenticationService
+    {
+        private RealAuthenticationService realAuthenticationService;
+
+        public AuthenticationProxy()
+        {
+            this.realAuthenticationService = new RealAuthenticationService();
+        }
+
+        public bool Authenticate( string username, string password )
+        {
+            // Kiểm tra điều kiện trước khi thực hiện login
+            if (realAuthenticationService.IsValidatedData(username, password))
+            {
+                // Nếu điều kiện hợp lệ, chuyển gọi đến đối tượng thực
+                return realAuthenticationService.Authenticate(username, password);
+            }
+            return false;
+        }
+
+        public bool IsValidatedData( string username, string password )
+        {
+            if (
+                username == "Phone Number" || 
+                username.Length < 10 && username.Length > 11 ||
+                !username.StartsWith("0") ||
+                (password == "Password")
+            )
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
+
     public partial class Login : Form
     {
 
         public static string sdt = "";
         private bool check = false;
+        IAuthenticationService authenticationService = new AuthenticationProxy();
+
         public Login()
         {
             InitializeComponent();
@@ -31,7 +90,7 @@ namespace WindowsFormsApp1
                 txtSDT.Text = "";
                 txtSDT.ForeColor = Color.Black;
             }
-    
+            this.isValidAccount();
         }
 
         private void txtGmail_Leave(object sender, EventArgs e)
@@ -41,7 +100,7 @@ namespace WindowsFormsApp1
                 txtSDT.Text = "Phone Number";
                 txtSDT.ForeColor = Color.FromArgb(64, 64, 64);
             }
-
+            this.isValidAccount();
         }
 
         private void txtMatKhau_Leave(object sender, EventArgs e)
@@ -53,6 +112,7 @@ namespace WindowsFormsApp1
                 txtMatKhau.ForeColor = Color.FromArgb(64, 64, 64);
                 txtMatKhau.PasswordChar = '\0';
             }
+            this.isValidAccount();
         }
 
         private void txtMatKhau_Enter(object sender, EventArgs e)
@@ -62,6 +122,7 @@ namespace WindowsFormsApp1
                 txtMatKhau.Text = "";
                 txtMatKhau.ForeColor = Color.Black;
             }
+            this.isValidAccount();
         }
 
 
@@ -92,9 +153,10 @@ namespace WindowsFormsApp1
 
         private void rjButton1_Click(object sender, EventArgs e)
         {
-            string query = "select MatKhau,SDT from NHANVIEN where SDT='" + txtSDT.Text + "' and MatKhau='" + txtMatKhau.Text + "'";
-            bool kq = dataProvider.Instance.ExecuteReader(query);
-            if (kq)
+            // Thực hiện login thông qua Proxy
+            bool result = authenticationService.Authenticate(txtSDT.Text, txtMatKhau.Text);
+
+            if (result)
             {
                 Thread th;
                 sdt = txtSDT.Text;
@@ -105,12 +167,29 @@ namespace WindowsFormsApp1
             }
             else
             {
-                lblerror.Text = "Số điện thoại hoặc mật khẩu không đúng!";
-                lblerror.ForeColor = Color.FromArgb(255, 90, 120);
-                txtMatKhau.Focus();
-                txtMatKhau.Text = "";
-                lblerror.Show();
+                // Login thất bại
+                this.ShowInValidDataError();
             }
+
+        }
+
+        private void isValidAccount()
+        {
+            bool isValidData = authenticationService.IsValidatedData(txtSDT.Text, txtMatKhau.Text);
+            if (!isValidData)
+            {
+                this.ShowInValidDataError();
+                return;
+            }
+        }
+
+        private void ShowInValidDataError()
+        {
+            lblerror.Text = "Số điện thoại hoặc mật khẩu không đúng!";
+            lblerror.ForeColor = Color.FromArgb(255, 90, 120);
+            /*txtMatKhau.Focus();*/
+            txtMatKhau.Text = "";
+            lblerror.Show();
         }
         
         private void OpenAdminForm()
