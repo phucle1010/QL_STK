@@ -1187,13 +1187,22 @@ namespace Thong_Tin_Khach_hang
                             pb = stk.moSoTietKiem(pb);
                             break;
                     }
+
+                    phieuRutTien pr = new phieuRutTien();
+                    pr.maPhieu = Random().ToString();
+                    pr.maKH = txtmaKH.Text;
+                    pr.maCN = MainFormManager.Instance.maCN();
+                    pr.ngayRut = dtmngayMoSo.Value;
+                    pr.soTienRut = decimal.Parse(txtTienMoSo.Text);
+                    pr.maNV = MainFormManager.Instance.maNV();
+                    pr.noiDungGiaoDich = "Nộp tiền vào sổ tiết kiệm";
                     giaoDich = new GiaoDich();
                     giaoDich.pb = pb;
                     giaoDich.pr = pr;
                     giaoDich.sodu = sodu;
                     giaoDich.makh = lblmakh2.Text;
                     bool success = giaoDich.GiaoDichMoSo();
-                    if (edit.InsertPassBook(pb) && dataProvider.Instance.ExecuteNonQuery(query2) != 0 && edit.InsertphieuRutTien(pr) && success)
+                    if (success)
                     {
                         b = true;
                         Print(pnlPrint);
