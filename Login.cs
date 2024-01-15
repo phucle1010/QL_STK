@@ -46,7 +46,7 @@ namespace WindowsFormsApp1
         public bool Authenticate(string username, string password)
         {
             // Kiểm tra điều kiện trước khi thực hiện login
-            if (realAuthenticationService.IsValidatedData(username, password))
+            if (IsValidatedData(username, password))
             {
                 // Nếu điều kiện hợp lệ, chuyển gọi đến đối tượng thực
                 return realAuthenticationService.Authenticate(username, password);
